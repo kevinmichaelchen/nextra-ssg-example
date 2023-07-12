@@ -1,0 +1,15 @@
+{
+  "index": "Introduction",
+  "02-getting-started": "Getting Started",
+  "03-deployments": "How to Deploy",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://github.com/kevinmichaelchen/nextra-ssg-example/issues",
+    "newWindow": true
+  }
+}

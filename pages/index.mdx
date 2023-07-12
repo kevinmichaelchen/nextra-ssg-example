@@ -1,0 +1,40 @@
+import { getTweet } from "react-tweet/api";
+import { useData } from "nextra/data";
+import TweetC from "../components/tweet";
+
+export const rawTweets = {
+  // https://twitter.com/rauchg/status/1333137455176851457
+  // Guillermo Rauch
+  guillermo: "1333137455176851457",
+};
+
+export const tweets = Object.fromEntries(
+  Object.entries(rawTweets).sort(([, a], [, b]) => a - b),
+);
+
+export const getStaticProps = async ({ params }) => {
+    const keys = Object.keys(tweets)
+    const values = Object.values(tweets)
+
+const arr = await Promise.all(values.map(async (id) => await getTweet(id)));
+
+return { props: { ssg: { tweets: keys.reduce((obj, k, i) => ({...obj, [k]:
+arr[i] }), {}) } } } }
+
+export const Tweet = ({ id }) => {
+  // Get the data from SSG, and render it as a component.
+  const { tweets } = useData();
+  return <TweetC data={tweets[id]} />;
+};
+
+# Introduction
+
+## Welcome
+
+Welcome to our Platform Docs.
+
+## Nextra
+
+This site was built on Nextra and NextJS for an optimized user experience.
+
+<Tweet id={"guillermo"} />
